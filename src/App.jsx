@@ -11,20 +11,30 @@ function App() {
     ['', '', '', '4', '1', '9', '', '', '5'],
     ['', '', '', '', '8', '', '', '7', '9']
   ];
-  const [board, setBoard] = useState(startingBoard);
+
+  const getInitialBoard = () => startingBoard.map(row => [...row]);
+
+  const [board, setBoard] = useState(getInitialBoard());
 
   const handleChange = (rowIndex, columnIndex, value) => {
-        if (value == '' || /^[1-9]$/.test(value)) {
-          const updatedBoard = board.map((row, r) =>
-            row.map((cell, c) => (r == rowIndex && c == columnIndex ? value : cell))
-          );
-          setBoard(updatedBoard);
-        }
-      };
+    if (value === '' || /^[1-9]$/.test(value)) {
+      const updatedBoard = board.map((row, r) =>
+        row.map((cell, c) => (r === rowIndex && c === columnIndex ? value : cell))
+      );
+      setBoard(updatedBoard);
+    }
+  };
+
+  const handleNewGame = () => {
+    setBoard(getInitialBoard());
+  };
 
   return(
     <div className="min-h-screen bg-slate-300 flex flex-col p-6">
       <h1 className="text-5xl font-bold  text-slate-800 mb-16 text-center">SUDOKU</h1>
+
+      
+
       <div className="grid grid-cols-9 gap-[1px] bg-black w-fit mx-60 border-4 border-black">
         {board.map((row, rowIndex) => 
           row.map((cell, columnIndex) => {
@@ -44,6 +54,15 @@ function App() {
              </div>
           )
         }))}
+      </div>
+
+      <div className="mt-6 flex justify-end mr-40 -mt-12">
+        <button
+          onClick={handleNewGame}
+          className="px-10 py-3 text-xl bg-slate-800 text-white rounded-lg hover:bg-slate-700"
+        >
+          New Game
+        </button>
       </div>
     </div>
   )
