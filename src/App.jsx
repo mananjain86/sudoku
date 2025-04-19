@@ -56,7 +56,7 @@ function App() {
         }))}
       </div>
 
-      <div className="mt-6 flex justify-end mr-40 -mt-12">
+      <div className="flex justify-end mr-40 -mt-12">
         <button onClick={handleNewGame} className="px-10 py-3 text-xl bg-slate-800 text-white rounded-lg hover:bg-slate-700">New Game</button>
       </div>
     </div>
